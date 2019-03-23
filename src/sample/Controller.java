@@ -26,7 +26,7 @@ public class Controller implements Initializable{
     }
 
     @FXML
-    private LineChart priceChart;
+    private LineChart<Number, Number> priceChart;
     @FXML
     private LineChart<Number, Number> quantityChart;
     @FXML
@@ -62,37 +62,69 @@ public class Controller implements Initializable{
             sellQuantity.setText(String.valueOf(temp.getSell_quantity()));
             overallQuantity.setText(String.valueOf(temp.getOverall_quantity()));
         }
+        // Charts
 
-        NumberAxis xAxis = new NumberAxis(213, 253,10);
-        xAxis.setLabel("Random Units");
+        //Price Chart
+        // Labels
+        NumberAxis xAxis = new NumberAxis();
+        xAxis.setLabel("Time");
 
-        NumberAxis yAxis = new NumberAxis(0,7,1);
-        yAxis.setLabel("Other Unit");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Price");
 
-        LineChart lineChart = new LineChart(xAxis,yAxis);
+        // Data
+        XYChart.Series<Number, Number> bpSeries = new XYChart.Series<Number, Number>();
+        XYChart.Series<Number, Number> spSeries = new XYChart.Series<Number, Number>();
 
-        XYChart.Series series = new XYChart.Series();
-        series.setName("Yo");
+        bpSeries.setName("Buy");
+        spSeries.setName("Sell");
+
         int i = 0;
-        /*
         while (true) {
             try {
                 item temp = (item) itemList.get(i);
-                series.getData().add(new XYChart.Data(i, 2));
+                bpSeries.getData().add(new XYChart.Data<>(i, temp.buy_average));
+                spSeries.getData().add(new XYChart.Data<>(i, temp.sell_average));
                 i++;
             } catch (Exception e) {
                 break;
             }
         }
-        */
-        //quantityChart.getData().add(series);
-        series.getData().add(new XYChart.Data(213,2));
-        series.getData().add(new XYChart.Data(223,3));
-        series.getData().add(new XYChart.Data(233,5));
-        series.getData().add(new XYChart.Data(243,5));
-        series.getData().add(new XYChart.Data(253,2));
 
-        quantityChart.getData().add(series);
+        priceChart.getData().add(bpSeries);
+        priceChart.getData().add(spSeries);
+
+
+
+        //Quantity Chart
+        // Labels
+        //NumberAxis xAxis = new NumberAxis(213, 253,10);
+        //xAxis.setLabel("Time");
+
+        //NumberAxis yAxis = new NumberAxis(0,7,1);
+        //yAxis.setLabel("Quantity");
+
+        // Data
+        XYChart.Series<Number, Number> bqSeries = new XYChart.Series<Number, Number>();
+        XYChart.Series<Number, Number> sqSeries = new XYChart.Series<Number, Number>();
+
+        bqSeries.setName("Buy");
+        sqSeries.setName("Sell");
+
+        int j = 0;
+        while (true) {// the original entry was at 2019 03 07 02:23
+            try {
+                item temp = (item) itemList.get(j);
+                bqSeries.getData().add(new XYChart.Data<>(j, temp.buy_quantity));
+                sqSeries.getData().add(new XYChart.Data<>(j, temp.sell_quantity));
+                j++;
+            } catch (Exception e) {
+                break;
+            }
+        }
+
+        quantityChart.getData().add(bqSeries);
+        quantityChart.getData().add(sqSeries);
     }
     public void changed(ActionEvent event){
 

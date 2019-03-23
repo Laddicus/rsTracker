@@ -64,7 +64,7 @@
                                  <children>
                                     <LineChart fx:id="priceChart" layoutX="-98.0" layoutY="-126.0" prefHeight="148.0" prefWidth="617.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <xAxis>
-                                          <CategoryAxis side="BOTTOM" />
+                                          <NumberAxis side="BOTTOM" />
                                        </xAxis>
                                        <yAxis>
                                           <NumberAxis side="LEFT" />
@@ -76,7 +76,7 @@
                                  <children>
                                     <LineChart fx:id="quantityChart" layoutX="-84.0" layoutY="-141.0" prefHeight="149.0" prefWidth="617.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <xAxis>
-                                          <CategoryAxis side="BOTTOM" />
+                                          <NumberAxis side="BOTTOM" />
                                        </xAxis>
                                        <yAxis>
                                           <NumberAxis side="LEFT" />

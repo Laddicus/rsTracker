@@ -19,7 +19,7 @@
       <HBox prefHeight="0.0" prefWidth="644.0">
          <children>
             <TextField fx:id="searchField" prefHeight="25.0" prefWidth="675.0" />
-            <Button fx:id="searchButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buttonClick" text="Button" />
+            <Button fx:id="searchButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buttonClick" text="Search" />
          </children>
       </HBox>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -64,7 +64,7 @@
                                  <children>
                                     <LineChart fx:id="priceChart" layoutX="-98.0" layoutY="-126.0" prefHeight="148.0" prefWidth="617.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <xAxis>
-                                          <CategoryAxis side="BOTTOM" />
+                                          <NumberAxis side="BOTTOM" />
                                        </xAxis>
                                        <yAxis>
                                           <NumberAxis side="LEFT" />
@@ -76,7 +76,7 @@
                                  <children>
                                     <LineChart fx:id="quantityChart" layoutX="-84.0" layoutY="-141.0" prefHeight="149.0" prefWidth="617.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <xAxis>
-                                          <CategoryAxis side="BOTTOM" />
+                                          <NumberAxis side="BOTTOM" />
                                        </xAxis>
                                        <yAxis>
                                           <NumberAxis side="LEFT" />
