@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sample.Controller">
+  <tabs>
+    <Tab text="Search">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="searchField" onAction="#search" prefHeight="25.0" prefWidth="549.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="searchButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#search" text="Search" HBox.hgrow="NEVER" />
+                     </children>
+                  </HBox>
+                  <SplitPane dividerPositions="0.24127906976744187" orientation="VERTICAL" prefHeight="533.0" prefWidth="600.0">
+                    <items>
+                        <GridPane prefHeight="32.0" prefWidth="598.0">
+                           <children>
+                              <Label text="Buy" GridPane.rowIndex="1" />
+                              <Label text="Sell" GridPane.rowIndex="2" />
+                              <Label text="Overall" GridPane.rowIndex="3" />
+                              <Label text="Price" GridPane.columnIndex="1" />
+                              <Label fx:id="buyPrice" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="sellPrice" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="overallPrice" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="Quantity" GridPane.columnIndex="2" />
+                              <Label fx:id="buyQuantity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label fx:id="sellQuantity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label fx:id="overallQuantity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="218.0" prefWidth="598.0">
+                           <children>
+                              <VBox prefHeight="350.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <LineChart fx:id="quantityChart" legendSide="LEFT" prefHeight="150.0" prefWidth="384.0" title="Quantity">
+                                       <xAxis>
+                                          <NumberAxis side="BOTTOM" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis fx:id="quantityYAxis" side="LEFT" />
+                                       </yAxis>
+                                    </LineChart>
+                                    <LineChart fx:id="priceChart" legendSide="LEFT" prefHeight="155.0" prefWidth="598.0" title="Price">
+                                       <xAxis>
+                                          <NumberAxis side="BOTTOM" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis fx:id="priceYAxis" side="LEFT" />
+                                       </yAxis>
+                                    </LineChart>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </VBox>
+         </content></Tab>
+    <Tab text="Compare">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="compareField" onAction="#compareSearch" prefHeight="25.0" prefWidth="549.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="clearButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clear" text="Clear" HBox.hgrow="NEVER" />
+                        <Button fx:id="searchButton1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#compareSearch" text="Search" HBox.hgrow="NEVER" />
+                     </children>
+                  </HBox>
+                  <SplitPane dividerPositions="0.24127906976744187" orientation="VERTICAL" prefHeight="533.0" prefWidth="600.0">
+                     <items>
+                        <GridPane prefHeight="32.0" prefWidth="598.0">
+                           <children>
+                              <Label text="Buy" GridPane.rowIndex="1" />
+                              <Label text="Sell" GridPane.rowIndex="2" />
+                              <Label text="Overall" GridPane.rowIndex="3" />
+                              <Label text="Price" GridPane.columnIndex="1" />
+                              <Label fx:id="buyPriceCompare" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="sellPriceCompare" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="overallPriceCompare" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="Quantity" GridPane.columnIndex="2" />
+                              <Label fx:id="buyQuantityCompare" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label fx:id="sellQuantityCompare" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label fx:id="overallQuantityCompare" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="218.0" prefWidth="598.0">
+                           <children>
+                              <VBox prefHeight="350.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <LineChart fx:id="quantityCompareChart" legendSide="LEFT" prefHeight="150.0" prefWidth="384.0" title="Quantity">
+                                       <xAxis>
+                                          <NumberAxis side="BOTTOM" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis fx:id="quantityCompareYAxis" side="LEFT" />
+                                       </yAxis>
+                                    </LineChart>
+                                    <LineChart fx:id="priceCompareChart" legendSide="LEFT" prefHeight="155.0" prefWidth="598.0" title="Price">
+                                       <xAxis>
+                                          <NumberAxis side="BOTTOM" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis fx:id="priceCompareYAxis" side="LEFT" />
+                                       </yAxis>
+                                    </LineChart>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </VBox>
+         </content></Tab>
+  </tabs>
+</TabPane>
