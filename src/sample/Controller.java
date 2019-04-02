@@ -106,7 +106,7 @@ public class Controller implements Initializable{
         priceYAxis.setAutoRanging(false);
         quantityYAxis.setAutoRanging(false);
     }
-    public XYChart.Series<Number,Number> makeSeries(List itemList, boolean price, boolean average, boolean compare, Double highest, Double lowest){
+    public XYChart.Series<Number,Number> makeSeries(List itemList, boolean price, boolean compare, Double highest, Double lowest){
 
         XYChart.Series<Number,Number> series = new XYChart.Series<>();
         int i = 0;
@@ -115,7 +115,7 @@ public class Controller implements Initializable{
                     item temp = (item) itemList.get(i);
                     if (temp.buy_average != 0) {
                         if (price) {
-                            if (average){
+                            if (price){
                                 series.getData().add(new XYChart.Data<>(i, temp.buy_average));
                             }
                             else {
@@ -123,14 +123,14 @@ public class Controller implements Initializable{
                             }
                         }
                         else{
-                            if (average){
+                            if (price){
                                 series.getData().add(new XYChart.Data<>(i, temp.buy_quantity));
                             }
                             else{
                                 series.getData().add(new XYChart.Data<>(i, temp.sell_quantity));
                             }
                         }
-                        if (average) {
+                        if (price) {
                             if (temp.buy_average > highest) {
                                 highest = Double.valueOf(temp.buy_average);
                             }
@@ -165,7 +165,7 @@ public class Controller implements Initializable{
             }
         }
         if (!compare) {
-            if (average) {
+            if (price) {
                 priceYAxis.setLowerBound(lowest - 10);
                 priceYAxis.setUpperBound(highest + 10);
             } else {
@@ -174,7 +174,7 @@ public class Controller implements Initializable{
             }
         }
         else {
-            if (average) {
+            if (price) {
                 priceCompareYAxis.setLowerBound(lowest - 10);
                 priceCompareYAxis.setUpperBound(highest + 10);
             } else {
@@ -221,8 +221,8 @@ public class Controller implements Initializable{
         //Price Chart
         // Labels
         // Data
-        XYChart.Series<Number, Number> bpSeries = makeSeries(itemList, true, true, false, 0.0, MAX_VALUE);
-        XYChart.Series<Number, Number> spSeries = makeSeries(itemList, true, false, false, 0.0, MAX_VALUE);
+        XYChart.Series<Number, Number> bpSeries = makeSeries(itemList, true, false, 0.0, MAX_VALUE);
+        XYChart.Series<Number, Number> spSeries = makeSeries(itemList, true, false, 0.0, MAX_VALUE);
 
         bpSeries.setName("Buy");
         spSeries.setName("Sell");
@@ -232,8 +232,8 @@ public class Controller implements Initializable{
 
         //Quantity Chart
         // Data
-        XYChart.Series<Number, Number> bqSeries = makeSeries(itemList, false, true, false, 0.0, MAX_VALUE);
-        XYChart.Series<Number, Number> sqSeries = makeSeries(itemList, false, false, false, 0.0, MAX_VALUE);
+        XYChart.Series<Number, Number> bqSeries = makeSeries(itemList, false,false, 0.0, MAX_VALUE);
+        XYChart.Series<Number, Number> sqSeries = makeSeries(itemList, false, false, 0.0, MAX_VALUE);
 
         bqSeries.setName("Buy");
         sqSeries.setName("Sell");
@@ -245,6 +245,16 @@ public class Controller implements Initializable{
         System.out.println(("Quantity:\nUpper: ") + quantityYAxis.getUpperBound()+ "\nLower: "+quantityYAxis.getLowerBound());
     }
     public void compareSearch() {
+        System.out.println(priceYAxis.getUpperBound());
+        Double highest;
+        Double lowest;
+        if (priceYAxis.getUpperBound() == 150.0){
+            priceYAxis.setUpperBound(0.0);
+            priceYAxis.setLowerBound(MAX_VALUE);
+            quantityYAxis.setUpperBound(0.0);
+            quantityYAxis.setLowerBound(MAX_VALUE);
+        }
+
         String searchText = compareField.getText();
         System.out.println(searchText);
 
@@ -268,10 +278,11 @@ public class Controller implements Initializable{
         //Price Chart
         // Labels
         // Data
-        Double highest = priceCompareYAxis.getUpperBound();
-        Double lowest = priceCompareYAxis.getLowerBound();
-        XYChart.Series<Number, Number> bpSeries = makeSeries(itemList, true, true, true, highest, lowest);
-        XYChart.Series<Number, Number> spSeries = makeSeries(itemList, true, false, true, highest, lowest);
+        highest = priceCompareYAxis.getUpperBound();
+        lowest = priceCompareYAxis.getLowerBound();
+
+        XYChart.Series<Number, Number> bpSeries = makeSeries(itemList, true, true, highest, lowest);
+        XYChart.Series<Number, Number> spSeries = makeSeries(itemList, true, true, highest, lowest);
 
         bpSeries.setName("Buy");
         spSeries.setName("Sell");
@@ -282,15 +293,17 @@ public class Controller implements Initializable{
         //Quantity Chart
         highest = quantityCompareYAxis.getUpperBound();
         lowest = quantityCompareYAxis.getLowerBound();
+        System.out.println("Upper: " + quantityCompareYAxis.getUpperBound());
         // Data
-        XYChart.Series<Number, Number> bqSeries = makeSeries(itemList, false, true, true, highest, lowest);
-        XYChart.Series<Number, Number> sqSeries = makeSeries(itemList, false, false, true, highest, lowest);
+        XYChart.Series<Number, Number> bqSeries = makeSeries(itemList, false, true, highest, lowest);
+        XYChart.Series<Number, Number> sqSeries = makeSeries(itemList, false, true, highest, lowest);
 
         bqSeries.setName("Buy");
         sqSeries.setName("Sell");
 
         quantityCompareChart.getData().add(bqSeries);
         quantityCompareChart.getData().add(sqSeries);
+        System.out.println("Upper: " + quantityCompareYAxis.getUpperBound());
     }
     public void clear(){
         buyPriceCompare.setText("");
@@ -300,6 +313,10 @@ public class Controller implements Initializable{
         sellQuantityCompare.setText("");
         overallQuantityCompare.setText("");
 
+        priceCompareYAxis.setUpperBound(0);
+        priceCompareYAxis.setLowerBound(MAX_VALUE);
+        quantityCompareYAxis.setUpperBound(0);
+        quantityCompareYAxis.setLowerBound(MAX_VALUE);
         priceCompareChart.getData().clear();
         quantityCompareChart.getData().clear();
 
